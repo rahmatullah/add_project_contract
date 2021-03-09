@@ -1,38 +1,43 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-     <record id="project_form_inherit" model="ir.ui.view">
+<!--     <record id="project_form_inherit" model="ir.ui.view">-->
+<!--        <field name="name">project.project.form.inherit</field>-->
+<!--        <field name="model">project.project</field>-->
+<!--        <field name="inherit_id" ref="project.edit_project"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//page[1]" position="after">-->
+<!--                <page name="contracts" string="Contracts">-->
+<!--                    <group name="project_contracts">-->
+<!--                        <field name="project_contracts" string="Contracts" required="0" widget="many2many_binary"/>-->
+<!--                    </group>-->
+<!--                </page>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <record id="view_project_form_inherit" model="ir.ui.view">
         <field name="name">project.project.form.inherit</field>
         <field name="model">project.project</field>
         <field name="inherit_id" ref="project.edit_project"/>
         <field name="arch" type="xml">
-            <xpath expr="//page[1]" position="after">
-                <page name="contracts" string="Contracts">
-                    <group name="project_contracts">
-                        <field name="project_contracts" string="Contracts" required="0" widget="many2many_binary"/>
-                    </group>
-                </page>
-            </xpath>
+            <field name="partner_id" position="after">
+                <field name="complete_percentage" widget="percentage"></field>
+            </field>
         </field>
     </record>
 
-<!--    <page name="contracts" string="Contracts">-->
-<!--        <group name="project_contracts">-->
-<!--            <field name="project_contracts" string="Contracts" required="0" widget="many2many_binary"/>-->
-<!--        </group>-->
-<!--    </page>-->
+    <record id="view_project_task_form_inherit" model="ir.ui.view">
+        <field name="name">project.task.form.inherit</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <field name="complete_task_percentage" widget="percentage"></field>
+            </field>
+        </field>
+    </record>
 
+
+
+<!--complete_percentage-->
 </odoo>
-
-<!--<?xml version="1.0" encoding="utf-8" ?>-->
-<!--<odoo>-->
-<!--    <record id="view_employee_form_inherit" model="ir.ui.view">-->
-<!--        <field name="name">employee.form.inherit</field>-->
-<!--        <field name="model">hr.employee</field>-->
-<!--        <field name="inherit_id" ref="hr.view_employee_form"/>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <field name="work_phone" position="after">-->
-<!--                <field name="birth_date" ></field>-->
-<!--            </field>-->
-<!--        </field>-->
-<!--    </record>-->
-<!--</odoo>-->

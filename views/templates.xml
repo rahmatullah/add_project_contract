@@ -1,24 +1,48 @@
 <odoo>
-    <data>
-<!--
-        <template id="listing">
-          <ul>
-            <li t-foreach="objects" t-as="object">
-              <a t-attf-href="#{ root }/objects/#{ object.id }">
-                <t t-esc="object.display_name"/>
-              </a>
-            </li>
-          </ul>
-        </template>
-        <template id="object">
-          <h1><t t-esc="object.display_name"/></h1>
-          <dl>
-            <t t-foreach="object._fields" t-as="field">
-              <dt><t t-esc="field"/></dt>
-              <dd><t t-esc="object[field]"/></dd>
-            </t>
-          </dl>
-        </template>
--->
-    </data>
+    <record id="view_project_tree_inherit" model="ir.ui.view">
+        <field name="name">project.project.tree.inherit</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.view_project"/>
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+<!--                <label for="test" string="You are here."/>-->
+
+                <field name="complete_percentage_progress" widget="progressbar"></field>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_project_kanban_inherit" model="ir.ui.view">
+        <field name="name">project.project.kanban.inherit</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.view_project_kanban"/>
+<!--        <field name="inherit_id" ref="project.project.kanban"/>-->
+        <field name="arch" type="xml">
+            <xpath expr="//kanban[1]/templates[1]/t[1]/div[1]/div[1]/span[1]/field[@name='is_favorite']" position="after">
+                <field name="complete_percentage_progress" display="full" attrs="{}" widget="progressbar"/>
+            </xpath>
+        </field>
+    </record>
+<!--    Tasks details list-->
+    <record id="view_project_tasl_tree_inherit" model="ir.ui.view">
+        <field name="name">project.task.tree.inherit</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_tree2"/>
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <field name="complete_task_percentage_progress" widget="progressbar"></field>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_project_task_kanban_inherit" model="ir.ui.view">
+        <field name="name">project.task.kanban.inherit</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='tag_ids']" position="after">
+                <field name="complete_task_percentage_progress" display="full" widget="progressbar"/>
+            </xpath>
+        </field>
+    </record>
 </odoo>
